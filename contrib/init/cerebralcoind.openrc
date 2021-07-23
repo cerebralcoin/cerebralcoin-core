@@ -1,0 +1,92 @@
+#!/sbin/openrc-run
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/cerebralcoin/.cerebralcoin" ]; then
+	CEREBRALCOIND_DEFAULT_DATADIR="/var/lib/cerebralcoin/.cerebralcoin"
+else
+	CEREBRALCOIND_DEFAULT_DATADIR="/var/lib/cerebralcoind"
+fi
+
+CEREBRALCOIND_CONFIGFILE=${CEREBRALCOIND_CONFIGFILE:-/etc/cerebralcoin/cerebralcoin.conf}
+CEREBRALCOIND_PIDDIR=${CEREBRALCOIND_PIDDIR:-/var/run/cerebralcoind}
+CEREBRALCOIND_PIDFILE=${CEREBRALCOIND_PIDFILE:-${CEREBRALCOIND_PIDDIR}/cerebralcoind.pid}
+CEREBRALCOIND_DATADIR=${CEREBRALCOIND_DATADIR:-${CEREBRALCOIND_DEFAULT_DATADIR}}
+CEREBRALCOIND_USER=${CEREBRALCOIND_USER:-${CEREBRALCOIN_USER:-cerebralcoin}}
+CEREBRALCOIND_GROUP=${CEREBRALCOIND_GROUP:-cerebralcoin}
+CEREBRALCOIND_BIN=${CEREBRALCOIND_BIN:-/usr/bin/cerebralcoind}
+CEREBRALCOIND_NICE=${CEREBRALCOIND_NICE:-${NICELEVEL:-0}}
+CEREBRALCOIND_OPTS="${CEREBRALCOIND_OPTS:-${CEREBRALCOIN_OPTS}}"
+
+name="Cerebralcoin Core Daemon"
+description="Cerebralcoin cryptocurrency P2P network daemon"
+
+command="/usr/bin/cerebralcoind"
+command_args="-pid=\"${CEREBRALCOIND_PIDFILE}\" \
+		-conf=\"${CEREBRALCOIND_CONFIGFILE}\" \
+		-datadir=\"${CEREBRALCOIND_DATADIR}\" \
+		-daemon \
+		${CEREBRALCOIND_OPTS}"
+
+required_files="${CEREBRALCOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${CEREBRALCOIND_USER} \
+			-N ${CEREBRALCOIND_NICE} -w 2000"
+pidfile="${CEREBRALCOIND_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${CEREBRALCOIND_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${CEREBRALCOIND_USER}:${CEREBRALCOIND_GROUP}" \
+	"${CEREBRALCOIND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${CEREBRALCOIND_USER}:${CEREBRALCOIND_GROUP}" \
+	"${CEREBRALCOIND_PIDDIR}"
+
+	checkpath -f \
+	-o ${CEREBRALCOIND_USER}:${CEREBRALCOIND_GROUP} \
+	-m 0660 \
+	${CEREBRALCOIND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${CEREBRALCOIND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run cerebralcoind."
+		eerror "The setting must appear in ${CEREBRALCOIND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Cerebralcoin Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

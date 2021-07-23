@@ -1,0 +1,33 @@
+# /etc/conf.d/cerebralcoind: config file for /etc/init.d/cerebralcoind
+
+# Config file location
+#CEREBRALCOIND_CONFIGFILE="/etc/cerebralcoin/cerebralcoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $CEREBRALCOIND_USER)
+#CEREBRALCOIND_PIDDIR="/var/run/cerebralcoind"
+
+# What filename to give the pidfile
+#CEREBRALCOIND_PIDFILE="${CEREBRALCOIND_PIDDIR}/cerebralcoind.pid"
+
+# Where to write cerebralcoind data (be mindful that the blockchain is large)
+#CEREBRALCOIND_DATADIR="/var/lib/cerebralcoind"
+
+# User and group to own cerebralcoind process
+#CEREBRALCOIND_USER="cerebralcoin"
+#CEREBRALCOIND_GROUP="cerebralcoin"
+
+# Path to cerebralcoind executable
+#CEREBRALCOIND_BIN="/usr/bin/cerebralcoind"
+
+# Nice value to run cerebralcoind under
+#CEREBRALCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#CEREBRALCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for cerebralcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+CEREBRALCOIND_SIGTERM_TIMEOUT=60
