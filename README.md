@@ -6,7 +6,7 @@ Cerebralcoin Core integration/staging tree
 https://cerebralcoincore.org
 
 What is Cerebralcoin?
-----------------
+------------------
 
 Cerebralcoin is an experimental digital currency that enables instant payments to
 anyone, anywhere in the world. Cerebralcoin uses peer-to-peer technology to operate
