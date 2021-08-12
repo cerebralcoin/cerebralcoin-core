@@ -146,7 +146,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1510704000; // November 15th, 2017.
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000100010001");
+        consensus.nMinimumChainWork = uint256S("000000000000000000000000000000000000000000000000fa631fb237b72ada");
 
         // By default assume that the signatures in ancestors of this block are valid.
         //consensus.defaultAssumeValid = uint256S("0x0000000000000000000f1c54590ee18d15ec70e68c8cd4cfbadb1b4f11697eee"); //563378
@@ -295,9 +295,8 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1462060800; // May 1st 2016
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1493596800; // May 1st 2017
 
-        printf("In test");
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000007dbe94253893cbd463");
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x0000000000000037a8cd3e06cd5edbfe9dd1dbcc5dacab279376ef7cfc2b4c75"); //1354312
@@ -316,10 +315,10 @@ public:
         //MineGenesis(genesis, consensus.powLimit, true);
         //assert(consensus.hashGenesisBlock == uint256S("0x142090789a55e00150fc6a9250e85c5e1e2f98ddc3b3b6ab404412863b1e8749"));
         //assert(genesis.hashMerkleRoot == uint256S("0xa4b662f9f2c7dfd099217f87292af730ed7284313c0f78de3903b83c8ebbe701"));
-        printf("TEST GENESIS HASH: %s\n",consensus.hashGenesisBlock.ToString().c_str());
-        printf("TEST MERKLE ROOT: %s\n",genesis.hashMerkleRoot.ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0x0000000055e9f5f871b154fc42bbe5c64f3872ccf3c728371e6d271d3e9c4d08"));
-        assert(genesis.hashMerkleRoot == uint256S("0xc298c8e917156163387f87789bf0d933a4f1e9ef07d72250907af59b407f02ef"));
+        //printf("TEST GENESIS HASH: %s\n",consensus.hashGenesisBlock.ToString().c_str());
+        //printf("TEST MERKLE ROOT: %s\n",genesis.hashMerkleRoot.ToString().c_str());
+        //assert(consensus.hashGenesisBlock == uint256S("0x0000000055e9f5f871b154fc42bbe5c64f3872ccf3c728371e6d271d3e9c4d08"));
+        //assert(genesis.hashMerkleRoot == uint256S("0xc298c8e917156163387f87789bf0d933a4f1e9ef07d72250907af59b407f02ef"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -392,7 +391,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
-        printf("In reg");
+        //printf("In reg");
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
