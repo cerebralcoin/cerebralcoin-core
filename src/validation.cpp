@@ -1176,13 +1176,25 @@ bool IsInitialBlockDownload()
     if (latchToFalse.load(std::memory_order_relaxed))
         return false;
     if (fImporting || fReindex)
+    {
+    	printf("failed in fImporting || fReindex");
         return true;
+    }
     if (chainActive.Tip() == nullptr)
+    {
+    	printf("failed in chainActive.Tip() == nullptr");
         return true;
+    }
     if (chainActive.Tip()->nChainWork < nMinimumChainWork)
+    {
+    	printf("failed in chainActive.Tip()->nChainWork < nMinimumChainWork");
         return true;
+    }
     if (chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge))
+    {
+    	printf("failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
         return true;
+    }
     LogPrintf("Leaving InitialBlockDownload (latching to false)\n");
     latchToFalse.store(true, std::memory_order_relaxed);
     return false;
