@@ -1182,20 +1182,20 @@ bool IsInitialBlockDownload()
     }
     if (chainActive.Tip() == nullptr)
     {
-    	throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip() == nullptr");
-    	printf("failed in chainActive.Tip() == nullptr");
+    	//throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip() == nullptr");
+    	//printf("failed in chainActive.Tip() == nullptr");
         return true;
     }
     if (chainActive.Tip()->nChainWork < nMinimumChainWork)
     {
-    	throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip()->nChainWork < nMinimumChainWork");
-    	printf("failed in chainActive.Tip()->nChainWork < nMinimumChainWork");
+    	//throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip()->nChainWork < nMinimumChainWork");
+    	//printf("failed in chainActive.Tip()->nChainWork < nMinimumChainWork");
         return true;
     }
     if (chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge))
     {
-    	throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
-    	printf("failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
+    	//throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
+    	//printf("failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
         return true;
     }
     LogPrintf("Leaving InitialBlockDownload (latching to false)\n");
