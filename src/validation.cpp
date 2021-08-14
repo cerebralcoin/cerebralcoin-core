@@ -1192,12 +1192,12 @@ bool IsInitialBlockDownload()
     	//printf("failed in chainActive.Tip()->nChainWork < nMinimumChainWork");
         return true;
     }
-    //if (chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge))
-    //{
-//    	//throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
-//    	//printf("failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
-        //return true;
-//    }
+    if (chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge))
+    {
+    	//throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Cerebralcoin is downloading blocks...failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
+    	//printf("failed in chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge)");
+        return true;
+    }
     LogPrintf("Leaving InitialBlockDownload (latching to false)\n");
     latchToFalse.store(true, std::memory_order_relaxed);
     return false;
