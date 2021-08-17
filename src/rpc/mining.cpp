@@ -593,7 +593,7 @@ static const CRPCCommand commands[] =
     { "mining",             "getnetworkhashps",       &getnetworkhashps,       {"nblocks","height"} },
     { "mining",             "getmininginfo",          &getmininginfo,          {} },
     { "mining",             "prioritisetransaction",  &prioritisetransaction,  {"txid","dummy","fee_delta"} },
-    { "mining",             "getblocktemplate",       &getblocktemplate,       {"template_request"} },
+    //{ "mining",             "getblocktemplate",       &getblocktemplate,       {"template_request"} },
     { "mining",             "submitblock",            &submitblock,            {"hexdata","dummy"} },
     { "mining",             "submitheader",           &submitheader,           {"hexdata"} },
 
