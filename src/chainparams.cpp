@@ -113,6 +113,7 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 210000;
+
         //consensus.BIP16Exception = uint256S("0x00000000f5cc3785e66f40b2ccfa9b44997b8c5d4df7c4af3f03d999b1582fe1");//uint256S("0x00000000000002dc756eebf4f49723ed8d30cc28a5f108eb94b1ba88ac4f9c22");
         consensus.BIP16Exception = uint256S("0x00000000d32b14992c89a97c781d1a27ea8453a39cf078b31ecf2fab0351c030");
         //consensus.BIP34Height = 227931;
