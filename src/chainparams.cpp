@@ -322,8 +322,9 @@ public:
 
         //genesis = CreateGenesisBlock(1627365354, 2903571056, 0x1d00ffff, 1, 50 * COIN);
         //genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
-        genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
-        MineGenesis(genesis, consensus.powLimit, true);
+        genesis = CreateGenesisBlock(1629269895, 349970207, 1d00ffff, 1, 50 * COIN);
+        //MineGenesis(genesis, consensus.powLimit, true);
+        printf("Mined Test  already");
 
         consensus.hashGenesisBlock = genesis.GetHash();
         //MineGenesis(genesis, consensus.powLimit, true);
@@ -333,6 +334,8 @@ public:
         //printf("TEST MERKLE ROOT: %s\n",genesis.hashMerkleRoot.ToString().c_str());
         //assert(consensus.hashGenesisBlock == uint256S("0x0000000055e9f5f871b154fc42bbe5c64f3872ccf3c728371e6d271d3e9c4d08"));
         //assert(genesis.hashMerkleRoot == uint256S("0xc298c8e917156163387f87789bf0d933a4f1e9ef07d72250907af59b407f02ef"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000000ec4fb1ad5cbfc4613b6bfedc620fb3da03e438b28cfdac79807f2d8e"));
+        assert(genesis.hashMerkleRoot == uint256S("0x79d033324d9d79e14a9479244e55544980ca140d53c033220b5871949e749737"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -423,7 +426,9 @@ public:
 
         UpdateVersionBitsParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock(1627368347, 2131540328, 0x1d00ffff, 1, 50 * COIN);
+        //genesis = CreateGenesisBlock(1627368347, 2131540328, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629258880, 0, 0x1d00ffff, 1, 50 * COIN);
+        MineGenesis(genesis, consensus.powLimit, true);
         consensus.hashGenesisBlock = genesis.GetHash();
         //MineGenesis(genesis, consensus.powLimit, true);
         //assert(consensus.hashGenesisBlock == uint256S("0xd079abaae9b0a9282a0bb30e354c813f8d30f3f487e6cbc4688e07946aec5db2"));
