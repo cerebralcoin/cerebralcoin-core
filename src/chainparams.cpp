@@ -190,7 +190,7 @@ public:
         //v5
         genesis = CreateGenesisBlock(1629258880, 1749843987, 0x1d00ffff, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
-
+        printf("Mined already");
         consensus.hashGenesisBlock = genesis.GetHash();
         //assert(consensus.hashGenesisBlock == uint256S("0xaefd189abd663ae5fa99b45d3c5502ca6ea057f6b5b2fc7cf17cd9462a7311a1"));
         //assert(consensus.hashGenesisBlock == uint256S("0xaefd189abd663ae5fa99b45d3c5502ca6ea057f6b5b2fc7cf17cd9462a7311a1"));
