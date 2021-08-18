@@ -188,8 +188,8 @@ public:
         //genesis = CreateGenesisBlock(1627198333, 1619343371, 0x1e0ffff0, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
         //v5
-        genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
-        MineGenesis(genesis, consensus.powLimit, true);
+        genesis = CreateGenesisBlock(1629258880, 1749843987, 0x1d00ffff, 1, 50 * COIN);
+        //MineGenesis(genesis, consensus.powLimit, true);
 
         consensus.hashGenesisBlock = genesis.GetHash();
         //assert(consensus.hashGenesisBlock == uint256S("0xaefd189abd663ae5fa99b45d3c5502ca6ea057f6b5b2fc7cf17cd9462a7311a1"));
@@ -208,8 +208,11 @@ public:
         //assert(consensus.hashGenesisBlock == uint256S("0x000000006669787882657a0ca14f77495203b8061ce0a8fedee79dc76aae8a0a"));
         //assert(genesis.hashMerkleRoot == uint256S("0xc298c8e917156163387f87789bf0d933a4f1e9ef07d72250907af59b407f02ef"));
         //v5
-        assert(consensus.hashGenesisBlock == uint256S("0x00000000d32b14992c89a97c781d1a27ea8453a39cf078b31ecf2fab0351c030"));
-        assert(genesis.hashMerkleRoot == uint256S("0xc298c8e917156163387f87789bf0d933a4f1e9ef07d72250907af59b407f02ef"));
+        //assert(consensus.hashGenesisBlock == uint256S("0x00000000d32b14992c89a97c781d1a27ea8453a39cf078b31ecf2fab0351c030"));
+        //assert(genesis.hashMerkleRoot == uint256S("0xc298c8e917156163387f87789bf0d933a4f1e9ef07d72250907af59b407f02ef"));
+        //v6
+        assert(consensus.hashGenesisBlock == uint256S("0x0000000097b56d1cc5596b6519c04d470326017760cec18918e36591c7a5f223"));
+        assert(genesis.hashMerkleRoot == uint256S("0x79d033324d9d79e14a9479244e55544980ca140d53c033220b5871949e749737"));
 
         //assert(consensus.hashGenesisBlock == uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
         //assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
@@ -317,7 +320,11 @@ public:
         m_assumed_blockchain_size = 30;
         m_assumed_chain_state_size = 2;
 
-        genesis = CreateGenesisBlock(1627365354, 2903571056, 0x1d00ffff, 1, 50 * COIN);
+        //genesis = CreateGenesisBlock(1627365354, 2903571056, 0x1d00ffff, 1, 50 * COIN);
+        //genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
+        MineGenesis(genesis, consensus.powLimit, true);
+
         consensus.hashGenesisBlock = genesis.GetHash();
         //MineGenesis(genesis, consensus.powLimit, true);
         //assert(consensus.hashGenesisBlock == uint256S("0x142090789a55e00150fc6a9250e85c5e1e2f98ddc3b3b6ab404412863b1e8749"));
