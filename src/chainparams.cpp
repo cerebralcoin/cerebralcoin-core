@@ -188,7 +188,8 @@ public:
         //genesis = CreateGenesisBlock(1627198333, 1619343371, 0x1e0ffff0, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
         //v5
-        genesis = CreateGenesisBlock(1629258535, 0, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
+        MineGenesis(genesis, consensus.powLimit, true);
 
         consensus.hashGenesisBlock = genesis.GetHash();
         //assert(consensus.hashGenesisBlock == uint256S("0xaefd189abd663ae5fa99b45d3c5502ca6ea057f6b5b2fc7cf17cd9462a7311a1"));
