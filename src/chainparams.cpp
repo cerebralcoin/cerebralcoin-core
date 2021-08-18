@@ -95,7 +95,8 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "BBC 2/Jul/2021 Italy beat England on penalties to win Euro 2020";
+    /*Cerebral
+     * const char* pszTimestamp = "BBC 2/Jul/2021 Italy beat England on penalties to win Euro 2020";
 	//const char* pszTimestamp = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
     //v2
     const CScript genesisOutputScript = CScript() << ParseHex("040a5250da9b77dbc0055c01a8f0a5c65d84002267812548c0dc4d340a52ec3d1dcc748870a8ff412dee73a163ef33216f4f2e316cce85fe85d85f784a9cc08a42") << OP_CHECKSIG;
@@ -103,6 +104,10 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
     //const CScript genesisOutputScript = CScript() << ParseHex("04b8faa7fde981a25bfe930596378b064c08bd61a4e58b9bfb2c45304306f533cf53f8c55a5f76dbf8360bd99a4a1b404e2151f6d85f0539c6d7de7b4e0c79fbb2") << OP_CHECKSIG;
     //const CScript genesisOutputScript = CScript() << ParseHex("040a5250da9b77dbc0055c01a8f0a5c65d84002267812548c0dc4d340a52ec3d1dcc748870a8ff412dee73a163ef33216f4f2e316cce85fe85d85f784a9cc08a42") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
+    */
+	const char* pszTimestamp = "18/Aug/2021 Maki Kaji, puzzle enthusiast, dies aged 69";
+	const CScript genesisOutputScript = CScript() << ParseHex("049cce3d4bdba242d103282ebb82bdbca968374a52ec34aa2116873292a3eb7628b48902edbb5be94c16a59550937a9177aa95989430fb95b34acb8137dcaf482a") << OP_CHECKSIG;
+	return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
 /**
@@ -183,7 +188,7 @@ public:
         //genesis = CreateGenesisBlock(1627198333, 1619343371, 0x1e0ffff0, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
         //v5
-        genesis = CreateGenesisBlock(1627352842, 1271609702, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629258535, 0, 0x1e0ffff0, 1, 50 * COIN);
 
         consensus.hashGenesisBlock = genesis.GetHash();
         //assert(consensus.hashGenesisBlock == uint256S("0xaefd189abd663ae5fa99b45d3c5502ca6ea057f6b5b2fc7cf17cd9462a7311a1"));
