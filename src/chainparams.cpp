@@ -322,7 +322,7 @@ public:
 
         //genesis = CreateGenesisBlock(1627365354, 2903571056, 0x1d00ffff, 1, 50 * COIN);
         //genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
-        genesis = CreateGenesisBlock(1629269895, 349970207, 1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629269895, 349970207, 0x1d00ffff, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
         printf("Mined Test  already");
 
