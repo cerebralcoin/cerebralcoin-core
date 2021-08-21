@@ -438,7 +438,7 @@ public:
         UpdateVersionBitsParametersFromArgs(args);
 
         //genesis = CreateGenesisBlock(1627368347, 2131540328, 0x1d00ffff, 1, 50 * COIN);
-        genesis = CreateGenesisBlock(1629270864, 62224777, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629454589, 62224777, 0x1d00ffff, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
         consensus.hashGenesisBlock = genesis.GetHash();
         //MineGenesis(genesis, consensus.powLimit, true);
