@@ -107,7 +107,7 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
     */
 	const char* pszTimestamp = "18/Aug/2021 Maki Kaji, puzzle enthusiast, dies aged 69";
 	//const CScript genesisOutputScript = CScript() << ParseHex("049cce3d4bdba242d103282ebb82bdbca968374a52ec34aa2116873292a3eb7628b48902edbb5be94c16a59550937a9177aa95989430fb95b34acb8137dcaf482a") << OP_CHECKSIG;
-	const CScript genesisOutputScript = CScript() << ParseHex("048ee737c49e9eeb206dd5fdc63a7ac700c2950787a8155d7779a04fb558abe33f9765b56579c06924023540c85ff4a26049dc9a0a1de478452b4fc91246f2d938") << OP_CHECKSIG;
+	const CScript genesisOutputScript = CScript() << ParseHex("04e832e2071eb2897af41739ceaa22e29f7bd465d90016b0c46721d877012b310af6682ce284e2a525258a7bfe727068fab11e3a3c7d06cc4371c9e0e30309425d") << OP_CHECKSIG;
 	//const CScript genesisOutputScript = CScript() << ParseHex("41048ee737c49e9eeb206dd5fdc63a7ac700c2950787a8155d7779a04fb558abe33f9765b56579c06924023540c85ff4a26049dc9a0a1de478452b4fc91246f2d938ac") << OP_CHECKSIG;
 	return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
