@@ -333,7 +333,7 @@ public:
 
         //genesis = CreateGenesisBlock(1627365354, 2903571056, 0x1d00ffff, 1, 50 * COIN);
         //genesis = CreateGenesisBlock(1629258535, 0, 0x1d00ffff, 1, 50 * COIN);
-        genesis = CreateGenesisBlock(1629453382, 2680605412, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629453382, 2683084821, 0x1d00ffff, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
         printf("Mined Test  already");
 
@@ -438,7 +438,7 @@ public:
         UpdateVersionBitsParametersFromArgs(args);
 
         //genesis = CreateGenesisBlock(1627368347, 2131540328, 0x1d00ffff, 1, 50 * COIN);
-        genesis = CreateGenesisBlock(1629270864, 11, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1629270864, 62224777, 0x1d00ffff, 1, 50 * COIN);
         //MineGenesis(genesis, consensus.powLimit, true);
         consensus.hashGenesisBlock = genesis.GetHash();
         //MineGenesis(genesis, consensus.powLimit, true);
