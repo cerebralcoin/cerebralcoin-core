@@ -3361,7 +3361,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
       for (const auto& tx : block.vtx) {
             if (tx->HasWitness()) {
             	//ToDo: Need to uncomment
-                return state.DoS(100, false, REJECT_INVALID, "unexpected-witness", true, strprintf("%s : unexpected witness data found", __func__));
+                //return state.DoS(100, false, REJECT_INVALID, "unexpected-witness", true, strprintf("%s : unexpected witness data found", __func__));
             }
         }
     }
