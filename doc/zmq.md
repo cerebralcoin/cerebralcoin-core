@@ -78,7 +78,7 @@ The high water mark value must be an integer greater than or equal to 0.
 
 For instance:
 
-    $ cerebralcoind -zmqpubhashtx=tcp://127.0.0.1:28332 \
+    $ cerebralcoind -zmqpubhashtx=tcp://127.0.0.1:21985 \
                -zmqpubrawtx=ipc:///tmp/cerebralcoind.tx.raw \
                -zmqpubhashtxhwm=10000
 
