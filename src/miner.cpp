@@ -163,7 +163,9 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
     LogPrintf("GetBlock Hash done");
     UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
+    LogPrintf("Update Time done");
     pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
+    LogPrintf("Get next work required done");
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
 
