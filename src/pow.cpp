@@ -6,9 +6,11 @@
 #include <pow.h>
 
 #include <arith_uint256.h>
+
 #include <chain.h>
 #include <primitives/block.h>
 #include <uint256.h>
+#include <util/system.h>
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
@@ -53,10 +55,10 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
 
     // Limit adjustment step
     int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
-    if (nActualTimespan < params.nPowTargetTimespan/4)
-        nActualTimespan = params.nPowTargetTimespan/4;
-    if (nActualTimespan > params.nPowTargetTimespan*4)
-        nActualTimespan = params.nPowTargetTimespan*4;
+    if (nActualTimespan < params.nPowTargetTimespan/2)
+        nActualTimespan = params.nPowTargetTimespan/2;
+    if (nActualTimespan > params.nPowTargetTimespan*2)
+        nActualTimespan = params.nPowTargetTimespan*2;
 
     // Retarget
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
@@ -65,9 +67,13 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     bnNew *= nActualTimespan;
     bnNew /= params.nPowTargetTimespan;
 
-    if (bnNew > bnPowLimit)
-        bnNew = bnPowLimit;
+    if (bnNew > bnPowLimit)  bnNew = bnPowLimit;
+    //if (bnNew.GetCompact()<0x1d00ffff && pindexLast->nHeight>52000) bnNew=0x1d00ffff;
+    //if (bnNew<=1.0 && pindexLast->nHeight>50364) bnNew=1.0;
+    //if (bnNew<=0.0 && pindexLast->nHeight<=50364) bnNew=1.0;
+    if (bnNew<=1.0) bnNew=1.0;
 
+    LogPrintf("CalculateNextWorkRequired %s %i \n", bnNew.ToString().c_str(), bnNew.GetCompact());
     return bnNew.GetCompact();
 }
 
@@ -80,12 +86,39 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
     // Check range
-    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
+    /*if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit)) {
+        printf("CheckProofOfWork: not good 1\n");
         return false;
+    } */
+
+    if (fNegative ) {
+        LogPrintf("CheckProofOfWork: range not good exit to false: fNegative=true.\n");
+        return false;
+        }
+
+     if (fOverflow ) {
+        LogPrintf("CheckProofOfWork: range not good exit to false: fOverflow=true.\n");
+        return false;
+    }
+    if (bnTarget > UintToArith256(params.powLimit)) {
+        LogPrintf("CheckProofOfWork: range not good exit to false. %s > %s \n",bnTarget.GetHex().c_str(),UintToArith256(params.powLimit).GetHex().c_str());
+        return false;
+    }
+	if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit)) {
+        LogPrintf("CheckProofOfWork: bnTarget=0");
+        return false;
+    }
+
+    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit)) {
+        LogPrintf("CheckProofOfWork: range not good exit to false.");
+        return false;
+    }
 
     // Check proof of work matches claimed amount
-    if (UintToArith256(hash) > bnTarget)
+    if (UintToArith256(hash) > bnTarget) {
+        LogPrintf("CheckProofOfWork: do not match claimed. bnTarget=%s - hash=%s",bnTarget.GetHex().c_str(),UintToArith256(hash).GetHex().c_str());
         return false;
+    }
 
     return true;
 }
