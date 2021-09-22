@@ -175,9 +175,9 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     	LogPrintf("Test Block Validity Failed\n");
         throw std::runtime_error(strprintf("%s: TestBlockValidity failed: %s", __func__, FormatStateMessage(state)));
     }
-    LogPrintf("Test done"\n);
+    LogPrintf("Test done\n");
     int64_t nTime2 = GetTimeMicros();
-    LogPrintf("Time Micros done"\n);
+    LogPrintf("Time Micros done\n");
     LogPrint(BCLog::BENCH, "CreateNewBlock() packages: %.2fms (%d packages, %d updated descendants), validity: %.2fms (total %.2fms)\n", 0.001 * (nTime1 - nTimeStart), nPackagesSelected, nDescendantsUpdated, 0.001 * (nTime2 - nTime1), 0.001 * (nTime2 - nTimeStart));
 
     return std::move(pblocktemplate);
