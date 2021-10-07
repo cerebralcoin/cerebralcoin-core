@@ -657,7 +657,6 @@ static void CleanupBlockRevFiles()
 
 static void ThreadImport(std::vector<fs::path> vImportFiles)
 {
-	printf("In ThreadImport");
     const CChainParams& chainparams = Params();
     RenameThread("cerebralcoin-loadblk");
     ScheduleBatchPriority();
