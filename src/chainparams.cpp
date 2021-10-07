@@ -23,44 +23,6 @@
 const arith_uint256 maxUint = UintToArith256(
         uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
 
-static void MineGenesis(CBlockHeader &genesisBlock, const uint256 &powLimit, bool noProduction) {
-    if (noProduction) genesisBlock.nTime = std::time(0);
-    genesisBlock.nNonce = 0;
-
-    printf("NOTE: Genesis nTime = %u \n", genesisBlock.nTime);
-    printf("WARN: Genesis nNonce (BLANK!) = %u \n", genesisBlock.nNonce);
-
-    arith_uint256 besthash;
-    memset(&besthash, 0xFF, 32);
-    arith_uint256 hashTarget = UintToArith256(powLimit);
-    printf("Target: %s\n", hashTarget.GetHex().c_str());
-    arith_uint256 newhash = UintToArith256(genesisBlock.GetHash());
-    while (newhash > hashTarget) {
-        genesisBlock.nNonce++;
-        if (genesisBlock.nNonce == 0) {
-            printf("NONCE WRAPPED, incrementing time\n");
-            ++genesisBlock.nTime;
-        }
-        // If nothing found after trying for a while, print status
-        if ((genesisBlock.nNonce & 0xffff) == 0)
-            printf("nonce %08X: hash = %s \r",
-                   genesisBlock.nNonce, newhash.ToString().c_str(),
-                   hashTarget.ToString().c_str());
-
-        if (newhash < besthash) {
-            besthash = newhash;
-            printf("New best: %s\n", newhash.GetHex().c_str());
-        }
-        newhash = UintToArith256(genesisBlock.GetHash());
-    }
-    printf("\nGenesis nTime = %u \n", genesisBlock.nTime);
-    printf("Genesis nNonce = %u \n", genesisBlock.nNonce);
-    printf("Genesis nBits: %08x\n", genesisBlock.nBits);
-    printf("Genesis Hash = %s\n", newhash.ToString().c_str());
-    printf("Genesis Hash Merkle Root = %s\n", genesisBlock.hashMerkleRoot.ToString().c_str());
-    printf("Genesis Hash Merkle Root = %s\n", genesisBlock.hashMerkleRoot.ToString().c_str());
-}
-
 
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
@@ -96,20 +58,9 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    /*Cerebral
-     * const char* pszTimestamp = "BBC 2/Jul/2021 Italy beat England on penalties to win Euro 2020";
-	//const char* pszTimestamp = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
-    //v2
-    const CScript genesisOutputScript = CScript() << ParseHex("040a5250da9b77dbc0055c01a8f0a5c65d84002267812548c0dc4d340a52ec3d1dcc748870a8ff412dee73a163ef33216f4f2e316cce85fe85d85f784a9cc08a42") << OP_CHECKSIG;
-    //const CScript genesisOutputScript = CScript() << ParseHex("41040a5250da9b77dbc0055c01a8f0a5c65d84002267812548c0dc4d340a52ec3d1dcc748870a8ff412dee73a163ef33216f4f2e316cce85fe85d85f784a9cc08a42ac") << OP_CHECKSIG;
-    //const CScript genesisOutputScript = CScript() << ParseHex("04b8faa7fde981a25bfe930596378b064c08bd61a4e58b9bfb2c45304306f533cf53f8c55a5f76dbf8360bd99a4a1b404e2151f6d85f0539c6d7de7b4e0c79fbb2") << OP_CHECKSIG;
-    //const CScript genesisOutputScript = CScript() << ParseHex("040a5250da9b77dbc0055c01a8f0a5c65d84002267812548c0dc4d340a52ec3d1dcc748870a8ff412dee73a163ef33216f4f2e316cce85fe85d85f784a9cc08a42") << OP_CHECKSIG;
-    return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
-    */
+
 	const char* pszTimestamp = "18/Aug/2021 Maki Kaji, puzzle enthusiast, dies aged 69";
-	//const CScript genesisOutputScript = CScript() << ParseHex("049cce3d4bdba242d103282ebb82bdbca968374a52ec34aa2116873292a3eb7628b48902edbb5be94c16a59550937a9177aa95989430fb95b34acb8137dcaf482a") << OP_CHECKSIG;
 	const CScript genesisOutputScript = CScript() << ParseHex("04e832e2071eb2897af41739ceaa22e29f7bd465d90016b0c46721d877012b310af6682ce284e2a525258a7bfe727068fab11e3a3c7d06cc4371c9e0e30309425d") << OP_CHECKSIG;
-	//const CScript genesisOutputScript = CScript() << ParseHex("41048ee737c49e9eeb206dd5fdc63a7ac700c2950787a8155d7779a04fb558abe33f9765b56579c06924023540c85ff4a26049dc9a0a1de478452b4fc91246f2d938ac") << OP_CHECKSIG;
 	return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
@@ -122,9 +73,8 @@ public:
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 210000;
 
-        //consensus.BIP16Exception = uint256S("0x00000000f5cc3785e66f40b2ccfa9b44997b8c5d4df7c4af3f03d999b1582fe1");//uint256S("0x00000000000002dc756eebf4f49723ed8d30cc28a5f108eb94b1ba88ac4f9c22");
         consensus.BIP16Exception = uint256S("0x00000000457ea038031d4a33e9c069fbc7f75c72d0b242fa043b1500c6ef4771");
-        //consensus.BIP34Height = 227931;
+
         consensus.BIP34Height = 1;
         //consensus.BIP34Hash = uint256S("0x00000000f5cc3785e66f40b2ccfa9b44997b8c5d4df7c4af3f03d999b1582fe1");//uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
         consensus.BIP34Hash = uint256S("0x00000000457ea038031d4a33e9c069fbc7f75c72d0b242fa043b1500c6ef4771");
@@ -155,9 +105,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1510704000; // November 15th, 2017.
 
         // The best chain should have at least this much work.
-        //consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000100010001");
-        //consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000100010001");
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000001");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000100010001");
 
         // By default assume that the signatures in ancestors of this block are valid.
         //consensus.defaultAssumeValid = uint256S("0x0000000000000000000f1c54590ee18d15ec70e68c8cd4cfbadb1b4f11697eee"); //563378
@@ -176,30 +124,8 @@ public:
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 10; //240;
         m_assumed_chain_state_size = 3;
-        //printf("In Main");
-
-        //genesis = CreateGenesisBlock(1231006505, 2083236893, 0x1d00ffff, 1, 50 * COIN);
-
-        //v2
-        //genesis = CreateGenesisBlock(1626758204, 1024552765, 0x1e0ffff0, 1, 50 * COIN);
-        //v3
-        //genesis = CreateGenesisBlock(1627201294, 2843361029, 0x1e0ffff0, 1, 50 * COIN);
-        //MineGenesis(genesis, consensus.powLimit, true);
-        //MineGenesis(genesis, consensus.powLimit, true);
-        //genesis = CreateGenesisBlock(std::time(nullptr), 546521654, 0x1d00ffff, 1, 50 * COIN);
-        //MineGenesis(genesis, consensus.powLimit, true);
-
-        //v4
-        //genesis = CreateGenesisBlock(1627198333, 1619343371, 0x1e0ffff0, 1, 50 * COIN);
-        //MineGenesis(genesis, consensus.powLimit, true);
-        //v5
-        //genesis = CreateGenesisBlock(1629258880, 1749843987, 0x1d00ffff, 1, 50 * COIN);
-        //v6
-        //genesis = CreateGenesisBlock(1629450099, 3832160289, 0x1d00ffff, 1, 50 * COIN);
-        //v7
         genesis = CreateGenesisBlock(1629509439, 2729627803, 0x1d00ffff, 1, 50 * COIN);
-        //MineGenesis(genesis, consensus.powLimit, true);
-        printf("Mined already");
+
         consensus.hashGenesisBlock = genesis.GetHash();
         //assert(consensus.hashGenesisBlock == uint256S("0xaefd189abd663ae5fa99b45d3c5502ca6ea057f6b5b2fc7cf17cd9462a7311a1"));
         //assert(consensus.hashGenesisBlock == uint256S("0xaefd189abd663ae5fa99b45d3c5502ca6ea057f6b5b2fc7cf17cd9462a7311a1"));
