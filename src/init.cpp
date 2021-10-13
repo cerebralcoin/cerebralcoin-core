@@ -555,7 +555,7 @@ std::string LicenseInfo()
     const std::string URL_SOURCE_CODE = "<https://github.com/cerebralcoin/cerebralcoin>";
     const std::string URL_WEBSITE = "<https://cerebralcoincore.org>";
 
-    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
+    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2019, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
            strprintf(_("Please contribute if you find %s useful. "
                        "Visit %s for further information about the software."),
