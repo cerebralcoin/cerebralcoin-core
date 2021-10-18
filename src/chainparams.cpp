@@ -165,23 +165,14 @@ public:
 
         checkpointData = {
                    {
-                    { 0, uint256S("0x00000000457ea038031d4a33e9c069fbc7f75c72d0b242fa043b1500c6ef4771")},
-       				{ 2, uint256S("0x0000000000450443c02012e68b44e92e795dadc852088ade483fcaa577a45e12")},
-       				{ 10, uint256S("0x00000000000d0f64b98e7aa72409aad4cd38ea1b1b714190e8574d3ae85d4d0c")},
-       				{ 20, uint256S("0x000000000047b5c9a82c277187727537cbe8bac1d33e64b244004e323b55735d")},
-                    { 30, uint256S("0x000000000035adac70d7e760ea3f36c66e7791903fadb2d9b44850959a3a469c")},
-                    { 40, uint256S("0x000000000071b9cb4e0593ea948adc7f19726d87be9933c3b8330f405f9b078f")},
-                    { 50, uint256S("0x00000000004be9b8b0db4fe8161ed8a9ee38960141a1f4219568e51c9d6e7731")},
-       				{ 60, uint256S("0x00000000005e815dd83b77f0ea934239f5abd7f752472d6d67d9765283c0ff80")},
-       				{ 70, uint256S("0x00000000005d88a623d99357d46dd780ef5f5f8c46bab0115ad601d1adad0bdc")},
-       				{ 80, uint256S("0x00000000006dccc0a927de8ee04edb5cef8b2cb554b8fb7ab2d795fe183f9deb")},
-       				{ 90, uint256S("0x00000000002ce6f9ce244aee42959053045da3d6204a482703382200f5f0f170")},
-					{ 100, uint256S("0x000000000078eded335d29ffe355501bba278a727519a3c96c9137a8843bc95e")}
+                    { 0, uint256S("0x00000000457ea038031d4a33e9c069fbc7f75c72d0b242fa043b1500c6ef4771")}
+
 
 
 
                    }
                };
+
 
         //chainTxData = ChainTxData{
          //   // Data from rpc: getchaintxstats 4096 0000000000000000000f1c54590ee18d15ec70e68c8cd4cfbadb1b4f11697eee
